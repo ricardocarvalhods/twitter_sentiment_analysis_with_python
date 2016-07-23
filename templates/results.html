@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <title>Twitter Sentiment Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <body>
+      <header class="w3-container w3-teal">
+        <h1>Twitter Sentiment Analysis</h1>
+      </header>
+
+      <div class="w3-container">
+          <br/>
+          <b>Chosen hashtag:</b> #{{ hashtag }}
+          <br/>
+          {% if score_total >= 0 %}
+             <b>Total Sentiment:</b><span style='color:green'> {{ sent_total }} ({{ score_total }})</span>
+          {% else %}
+             <b>Total Sentiment:</b><span style='color:red'> {{ sent_total }} ({{ score_total }})</span>
+          {% endif %}
+          <br/><br/>
+          The Total Sentiment of the hashtag is obtained through the sum of scores (number indicated in the parenthesis) of the tweets that have the hashtag.
+          <br/><br/>
+          <div id='button'>
+              <form action="/">
+                  <input type=submit value='Submit another hashtag'>
+              </form>
+          </div>
+          
+          <hr/>
+          <b>Summary of the tweets:</b><br/>
+          <div class="w3-responsive">
+              <table class="w3-table w3-striped w3-bordered w3-border w3-small" style='width:auto'>
+              <tr><td>Number of Tweets:</td><td>{{ nr_tweets }}</td></tr>
+              <tr><td>Minimum Tweet Score:</td><td>{{ score_min }}</td></tr>
+              <tr><td>Average Tweet Score:</td><td>{{ score_avg }}</td></tr>
+              <tr><td>Maximum Tweet Score:</td><td>{{ score_max }}</td></tr>
+              <tr><td>Median Tweet Score:</td><td>{{ score_med }}</td></tr>
+              </table>
+          </div>
+          <br/>
+          <b>Below you can see all the considered tweets and their individual scores:</b>
+          <br/>
+
+          <button id="bt01" onclick="document.getElementById('id01').style.display='block';
+                                     document.getElementById('bt01').style.display='none'">Show tweets</button>
+
+          <div id="id01" style="display:none">
+              <button onclick="this.parentElement.style.display='none';
+                               document.getElementById('bt01').style.display='block'">Hide tweets</button>
+              <table class="w3-table w3-striped w3-bordered w3-border w3-small" style='width:auto'>
+                  <tr><th>Tweet Text</th><th>Score</th></tr>
+                  {% for text, score in twitter_dict.items() %}
+                  <tr><td>{{ text }}</td><td>{{ score }}</td></tr>
+                  {% endfor %}
+              </table>
+          </div>
+          
+          <hr>
+            <div class="w3-container w3-pale-green w3-bottombar w3-border-green w3-border">
+              <p><b>Credits:</b> Ricardo Carvalho (ricardosc at gmail.com)
+                  <li>To understand how this sentiment analysis is done, go to <a target='_blank' href='http://ricardoscr.github.io/portfolio/twitter-sentiment-analysis'>this page</a>.</li>
+                  <li>Complete code for this app <a target='_blank' href='https://github.com/ricardoscr/twitter_sentiment_analysis_with_python'>available on Github</a>.</li>
+                  <li>For more apps from the author, see the <a target='_blank' href='http://ricardoscr.github.io/portfolio/'>portfolio page</a>.
+                      </p>
+            </div>
+          
+          <br/><br/><br/>
+      </div>
+  </body>
+</html>
